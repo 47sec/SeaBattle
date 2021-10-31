@@ -3,10 +3,16 @@
 #include <vector>
 class Field
 {
-	char field_image[10][10];
-	std::vector <Ship> vect;
+	static int size_of_fields;
+	char field_image[size_of_fields][10];
+	std::vector <Ship> ships;	//может использовать что-то другое?
+	
+
+
 public:
 	Field();
 	void printField();
+	void printString(int num_of_str);
 	void setShip(Ship ship);
+	int getSizeOfField();
 };

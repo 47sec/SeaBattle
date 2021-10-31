@@ -6,6 +6,7 @@ Ship::Ship(int ship_length)
 	x_start = 5 - length / 2;
 	x_end = x_start + length;
 	y_start = y_end = 5;
+	damage.resize(length, false);
 }
 
 short Ship::getXStart()
