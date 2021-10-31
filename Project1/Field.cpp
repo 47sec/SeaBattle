@@ -1,11 +1,13 @@
 #include "Field.h"
 #include <iostream>
 
+int Field::size_of_fields = 10;
+
 Field::Field()
 {
-	for (size_t i = 0; i < 10; i++)
+	for (size_t i = 0; i < size_of_fields; i++)
 	{
-		for (size_t j = 0; j < 10; j++)
+		for (size_t j = 0; j < size_of_fields; j++)
 		{
 			field_image[i][j] = '+';
 		}
@@ -14,13 +16,21 @@ Field::Field()
 
 void Field::printField()
 {
-	for (size_t i = 0; i < 10; i++)
+	for (size_t i = 0; i < size_of_fields; i++)
 	{
-		for (size_t j = 0; j < 10; j++)
+		for (size_t j = 0; j < size_of_fields; j++)
 		{
 			std::cout << field_image[j][i] << " ";
 		}
 		std::cout << std::endl;
+	}
+}
+
+void Field::printString(int num_of_str)
+{
+	for (size_t i = 0; i < size_of_fields; i++)
+	{
+		std::cout << field_image[i][num_of_str] << " ";
 	}
 }
 
@@ -33,4 +43,10 @@ void Field::setShip(Ship ship)
 			field_image[i][j] = 'S';
 		}
 	}
+	ships.push_back(ship);
+}
+
+int Field::getSizeOfField()
+{
+	return size_of_fields;
 }
