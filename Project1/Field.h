@@ -3,11 +3,11 @@
 #include <vector>
 class Field
 {
-	static int size_of_fields;
-	char field_image[size_of_fields][10];
+	std::vector <std::vector<char>> field_image;
 	std::vector <Ship> ships;	//может использовать что-то другое?
 	
-
+public:
+	static int size_of_fields;
 
 public:
 	Field();
