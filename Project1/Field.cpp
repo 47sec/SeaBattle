@@ -5,6 +5,11 @@ int Field::size_of_fields = 10;
 
 Field::Field()
 {
+	field_image.resize(size_of_fields);
+	for (size_t i = 0; i < size_of_fields; i++)
+	{
+		field_image.at(i).resize(size_of_fields);
+	}
 	for (size_t i = 0; i < size_of_fields; i++)
 	{
 		for (size_t j = 0; j < size_of_fields; j++)

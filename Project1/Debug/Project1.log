@@ -1,0 +1,4 @@
+﻿  main.cpp
+G:\Learning\VS2019\GitTest4Studs\Project1\main.cpp(119,23): warning C4018: '<': signed/unsigned mismatch
+G:\Learning\VS2019\GitTest4Studs\Project1\main.cpp(262): warning C4715: 'interfaceMenu': not all control paths return a value
+  Project1.vcxproj -> G:\Learning\VS2019\GitTest4Studs\Project1\Debug\Project1.exe
