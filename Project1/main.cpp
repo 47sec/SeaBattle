@@ -42,6 +42,56 @@ void printMenu(int counter, int current_position, T t, Args... args)
 	printMenu(counter,current_position,args...);
 }
 
+template <typename T>
+void countMenuSize(int &counter, T t)
+{
+	counter++;
+}
+
+template <typename T, typename... Args>
+void countMenuSize(int &counter, T t, Args... args)
+{
+	counter++;
+	countMenuSize(counter, args...);
+}
+
+
+template <typename... Args>
+int drawMenu(int current_menu, Args... args)
+{
+	int current_position = 0;
+	int current_menu_size = 0;
+	int counter = 0;
+	countMenuSize(current_menu_size, args...);
+	system("cls");
+	printMenu(counter, current_position,
+		args...);
+	do
+	{
+		switch (_getch())
+		{
+		case 72:
+			if (current_position > 0)
+				current_position--;
+			else
+				current_position = current_menu_size - 1;
+			break;
+		case 80:
+			if (current_position < current_menu_size - 1)
+				current_position++;
+			else
+				current_position = 0;
+			break;
+		case 13:
+			return current_menu * 10 + (current_position + 1);
+			break;
+		}
+		system("cls");
+		printMenu(counter, current_position,
+			args...);
+	} while (true);
+}
+
 int main()
 {
 	hideCursor();
@@ -50,7 +100,6 @@ int main()
 	while (current_menu != 14)
 	{
 		current_menu = interfaceMenu(current_menu);
-		//_getch();
 	}
 
 
@@ -78,7 +127,7 @@ void fieldsPaint(Field lfield, Field rfield)
 
 int interfaceMenu(int current_menu)
 {
-	int counter = 0, current_position = 0;
+	int counter = 0, current_position = 0, current_menu_size = 0;
 	CONSOLE_FONT_INFOEX cfi;
 	cfi.cbSize = sizeof(cfi);
 	cfi.nFont = 0;
@@ -88,10 +137,19 @@ int interfaceMenu(int current_menu)
 	/*
 	* 0 - tittle screen
 	* 1 - main_menu
-	* 11 - new game
-	* 12 - continue
-	* 13 - about
-	* 14 - exit
+		* 11 - new game
+			* 111 player vs cpu
+				* 1111 easy
+				* 1112 hard
+				* 1113 back
+			* 112 cpu vs cpu
+				* 1121 easy
+				* 1122 hard
+				* 1123 back
+			* 113 back 
+		* 12 - continue
+		* 13 - about
+		* 14 - exit
 	*/
 	switch (current_menu)
 	{
@@ -100,20 +158,16 @@ int interfaceMenu(int current_menu)
 		{
 			Sleep(500);
 			system("cls");
-			Sleep(500);
 			std::cout << "\n\n\n\t\t\t SEA BATTLE";
+			Sleep(500);
 			std::cout << "\n\t\t\tpress any key";
 		}
 		return 1;
 		break;
 
-	case 1:
-		system("cls");
-		printMenu(counter, current_position,
-			"New Game", "Continue", "About", "Exit");
-		while (_kbhit() != 28)
+	/*case 1:
+		do
 		{
-			system("cls");
 			switch (_getch())
 			{
 			case 72:
@@ -128,14 +182,81 @@ int interfaceMenu(int current_menu)
 				else
 					current_position = 0;
 				break;
-			case 28:
-
+			case 13:
+				return current_menu * 10 + current_position + 1;
 				break;
 			}
+			system("cls");
 			printMenu(counter, current_position,
 				"New Game", "Continue", "About", "Exit");
-		}
+		} while (true);
 		break;
+	case 11:
+		countMenuSize(current_menu_size, "Player vs CPU", "CPU vs CPU", "Back");
+		system("cls");
+		printMenu(counter, current_position,
+			"Player vs CPU", "CPU vs CPU","Back");
+		do
+		{
+			switch (_getch())
+			{
+			case 72:
+				if (current_position > 0)
+					current_position--;
+				else
+					current_position = current_menu_size-1;
+				break;
+			case 80:
+				if (current_position < current_menu_size-1)
+					current_position++;
+				else
+					current_position = 0;
+				break;
+			case 13:
+				return current_menu * 10 + (current_position + 1);
+				break;
+			}
+			system("cls");
+			printMenu(counter, current_position,
+				"Player vs CPU", "CPU vs CPU","Back");
+		} while (true);
+		break;
+	case 111:
+		countMenuSize(current_menu_size, "Easy", "Hard","Back");
+		system("cls");
+		printMenu(counter, current_position,
+			"Easy", "Hard", "Back");
+		do
+		{
+			switch (_getch())
+			{
+			case 72:
+				if (current_position > 0)
+					current_position--;
+				else
+					current_position = current_menu_size - 1;
+				break;
+			case 80:
+				if (current_position < current_menu_size - 1)
+					current_position++;
+				else
+					current_position = 0;
+				break;
+			case 13:
+				return current_menu * 10 + (current_position + 1);
+				break;
+			}
+			system("cls");
+			printMenu(counter, current_position,
+				"Easy", "Hard","Back");
+		} while (true);
+		break;*/
+	case 1:
+		return
+			drawMenu(current_menu, "New Game", "Continue", "About", "Exit");
+		break;
+	case 11:
+		return
+			drawMenu(current_menu, "Player vs CPU", "CPU vs CPU", "Back");
 	}
-	return 0;
 }
