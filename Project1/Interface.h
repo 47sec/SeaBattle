@@ -20,3 +20,5 @@ void countMenuSize(int& counter, T t, Args... args);
 
 template <typename... Args>
 int drawMenu(int current_menu, Args... args);
+
+void setShips();

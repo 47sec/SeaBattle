@@ -39,7 +39,7 @@ void Field::printString(int num_of_str)
 	}
 }
 
-void Field::setShip(Ship ship)
+void Field::setShipInCoordArr(Ship ship)
 {
 	for (short i = ship.getXStart(); i <= ship.getXEnd(); i++)
 	{
@@ -48,10 +48,25 @@ void Field::setShip(Ship ship)
 			field_image[i][j] = 'S';
 		}
 	}
-	ships.push_back(ship);
 }
 
 int Field::getSizeOfField()
 {
 	return size_of_fields;
 }
+
+void Field::reInitFieldCorrdArr(std::vector <Ship>& ships)
+{
+	for (size_t i = 0; i < size_of_fields; i++)
+	{
+		for (size_t j = 0; j < size_of_fields; j++)
+		{
+			field_image[i][j] = '+';
+		}
+	}
+	for (size_t i = 0; i < ships.size(); i++)
+	{
+		setShipInCoordArr(ships.at(i));
+	}
+}
+
