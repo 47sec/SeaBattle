@@ -8,15 +8,8 @@ void hideCursor()
 	SetConsoleCursorInfo(consoleHandle, &info);
 }
 
-int interfaceMenu(int current_menu)
-{
-	int counter = 0, current_position = 0, current_menu_size = 0;
-	CONSOLE_FONT_INFOEX cfi;
-	cfi.cbSize = sizeof(cfi);
-	cfi.nFont = 0;
-	cfi.dwFontSize.X = 30;                   // Width of each character in the font
-	cfi.dwFontSize.Y = 30;                  // Height
-	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
+int interfaceMenu
+(
 	/*
 	* 0 - tittle screen
 	* 1 - main_menu
@@ -40,6 +33,17 @@ int interfaceMenu(int current_menu)
 		* 13 - about
 		* 14 - exit
 	*/
+	int current_menu
+)
+{
+	int counter = 0, current_position = 0, current_menu_size = 0;
+	CONSOLE_FONT_INFOEX cfi;
+	cfi.cbSize = sizeof(cfi);
+	cfi.nFont = 0;
+	cfi.dwFontSize.X = 30;                   // Width of each character in the font
+	cfi.dwFontSize.Y = 30;                  // Height
+	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
+	
 	switch (current_menu)
 	{
 	case 0:
@@ -153,13 +157,14 @@ int drawMenu(int current_menu, Args... args)
 				current_position = 0;
 			break;
 		case 13:
-			//ÄÀËÅÅ ÊÎÑÒÛËÜ(ÊÀÊ ÌÍÅ ÊÀÆÅÒÑß)
+			//Êîñòûëü îñòàâèë â êîììåíòå.Ñäåëàë áîëåå ëàêîíè÷íî
 			if (
-				(
+				/*(
 					current_menu == 11 ||
 					current_menu == 111 || current_menu == 112 ||
 					current_menu == 1111 || current_menu == 1112
-					)
+					)*/
+				current_menu > 1
 				&& current_position == current_menu_size - 1
 				)
 				return current_menu / 10;
@@ -172,3 +177,4 @@ int drawMenu(int current_menu, Args... args)
 			args...);
 	} while (true);
 }
+

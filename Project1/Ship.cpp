@@ -4,11 +4,13 @@ Ship::Ship(int ship_length, int size_of_field)
 {
 	length = ship_length;
 	x_start = size_of_field/2 - length / 2;
-	x_end = x_start + length;
+	x_end = x_start + length-1;
 	y_start = y_end = size_of_field/2;
+	x_border = size_of_field - 1;
+	y_border = size_of_field - 1;
 	damage.resize(length, false);
 }
-
+//Ãåòòåğû--------------------------------------------
 short Ship::getXStart()
 {
 	return x_start - 1;
@@ -27,4 +29,66 @@ short Ship::getYStart()
 short Ship::getYEnd()
 {
 	return y_end - 1;
+}
+//Ñåòòåğû-----------------------------------------------
+void Ship::setXStart(short x)
+{
+	x_start = x;
+}
+
+void Ship::setXEnd(short x)
+{
+	x_end = x;
+}
+
+void Ship::setYStart(short y)
+{
+	y_start = y;
+}
+
+void Ship::setYEnd(short y)
+{
+	y_end = y;
+}
+
+void Ship::moveShip(short x_coord_shift, short y_coord_shift)
+{
+	//îñü x
+	if ((x_coord_shift > 0) && (x_end <= x_border))
+	{
+		x_start++;
+		x_end++;
+	}
+	if ((x_coord_shift < 0) && (x_start != 1))
+	{
+		x_start--;
+		x_end--;
+	}
+	//îñü y
+	if ((y_coord_shift > 0) && (y_end <= y_border))
+	{
+		y_start++;
+		y_end++;
+	}
+	if ((y_coord_shift < 0) && (y_start != 1))
+	{
+		y_start--;
+		y_end--;
+	}
+}
+
+void Ship::rotateShip()
+{
+	if (y_start == y_end)
+	{
+		y_start = x_start;
+		y_end = x_end;
+		x_end = x_start;
+	}
+	else if (x_start == x_end)
+	{
+		x_start = y_start;
+		x_end = y_end;
+		y_end = y_start;
+	}
 }

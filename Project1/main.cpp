@@ -25,6 +25,7 @@ int main()
 	hideCursor();
 	Field left_field, right_field;
 	int current_menu = 0;
+	//Навигация по меню-----------------------------------
 	while (current_menu != 14)
 	{
 		configGame(current_menu, game_config_array);
@@ -34,7 +35,40 @@ int main()
 		current_menu = interfaceMenu(current_menu);
 	}
 	if (current_menu == 14) return 0;
-	fieldsPaint(left_field, right_field);
+	//Конец навигации по меню------------------------------
+	//fieldsPaint(left_field, right_field);
+	Ship ship_x3(3, left_field.getSizeOfField());
+	std::vector <Ship> ships_left_filed;
+	ships_left_filed.push_back(ship_x3);
+	int ch = 0;
+		do
+		{
+			left_field.reInitFieldCorrdArr(ships_left_filed);
+			//system("cls");
+			fieldsPaint(left_field, right_field);
+			std::cout << ships_left_filed.at(0).getXStart() << ":" <<
+				ships_left_filed.at(0).getXEnd() << std::endl;
+			std::cout << ships_left_filed.at(0).getYStart() << ":" <<
+				ships_left_filed.at(0).getYEnd() << std::endl;
+			switch (ch=_getch())
+			{
+			case 72:	//вверх
+				ships_left_filed.at(0).moveShip(0, -1);
+				break;
+			case 80:	//вниз
+				ships_left_filed.at(0).moveShip(0, 1);
+				break;
+			case 75:	//влево
+				ships_left_filed.at(0).moveShip(-1, 0);
+				break;
+			case 77:	//вправо
+				ships_left_filed.at(0).moveShip(1, 0);
+				break;
+			case 32:
+				ships_left_filed.at(0).rotateShip();
+				break;
+			}
+		} while (true);
 }
 
 
