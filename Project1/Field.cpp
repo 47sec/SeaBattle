@@ -41,9 +41,30 @@ void Field::printString(int num_of_str)
 
 void Field::setShipInCoordArr(Ship ship)
 {
-	for (short i = ship.getXStart(); i <= ship.getXEnd(); i++)
+	int xstart = 0, xend = 0, ystart = 0, yend = 0;
+	if (ship.getXStart() > ship.getXEnd())
 	{
-		for (short j = ship.getYStart(); j <= ship.getYEnd(); j++)
+		xstart = ship.getXEnd();
+		xend = ship.getXStart();
+	}
+	else
+	{
+		xstart = ship.getXStart();
+		xend = ship.getXEnd();
+	}
+	if (ship.getYStart() > ship.getYEnd())
+	{
+		ystart = ship.getYEnd();
+		yend = ship.getYStart();
+	}
+	else
+	{
+		ystart = ship.getYStart();
+		yend = ship.getYEnd();
+	}
+	for (short i = xstart; i <= xend; i++)
+	{
+		for (short j = ystart; j <= yend; j++)
 		{
 			field_image[i][j] = 'S';
 		}
