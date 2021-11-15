@@ -55,6 +55,7 @@ int interfaceMenu
 			Sleep(500);
 			std::cout << "\n\t\t\tpress any key";
 		}
+
 		return 1;
 		break;
 	case 1:
@@ -65,7 +66,7 @@ int interfaceMenu
 	case 11:
 		return
 			drawMenu(current_menu,
-				"Player vs CPU", "CPU vs CPU", "Back");
+				"Player vs CPU", "CPU vs CPU", "New String", "Back");
 		break;
 	case 111:
 		return

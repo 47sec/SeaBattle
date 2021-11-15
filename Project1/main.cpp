@@ -37,7 +37,7 @@ int main()
 	if (current_menu == 14) return 0;
 	//Конец навигации по меню------------------------------
 	//fieldsPaint(left_field, right_field);
-	Ship ship_x3(3, left_field.getSizeOfField());
+	Ship ship_x3(9, left_field.getSizeOfField());
 	std::vector <Ship> ships_left_filed;
 	ships_left_filed.push_back(ship_x3);
 	int ch = 0;
@@ -50,6 +50,7 @@ int main()
 				ships_left_filed.at(0).getXEnd() << std::endl;
 			std::cout << ships_left_filed.at(0).getYStart() << ":" <<
 				ships_left_filed.at(0).getYEnd() << std::endl;
+
 			switch (ch=_getch())
 			{
 			case 72:	//вверх
